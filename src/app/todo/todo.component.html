@@ -1,0 +1,20 @@
+<div class="container">
+    <span class="header">To do List:</span>
+    <hr>
+    <div class="input-task">
+        <input type="text" class="addTask" placeholder="Type your task here..." [(ngModel)]="task">
+        <button class="btn" (click)="addTask()" [hidden]="edit" [disabled]="!task">Add Task</button>
+        <button class="btn" (click)="saveTask()" [hidden]="!edit" [disabled]="!task">Save</button>
+    </div>
+    <div class="task-list">
+        <div class="header">Tasks</div>
+        <div *ngFor="let task of taskList;let i=index" class="task"><span *ngIf="task.status!='done'">{{i+1}}. {{task.detail}}</span><span *ngIf="task.status=='done'" class="done-task">{{i+1}}. {{task.detail}} </span>
+            <div class="task-button">
+                <input type="checkbox" class="btn" (click)="markDone(i)">
+                <button class="btn" (click)="editTask(i)" [disabled]="task.status=='done'">Edit</button>
+                <button class="btn" (click)="deleteTask(i)">Delete</button>
+            </div>
+        </div>
+    </div>
+
+</div>
