@@ -1,5 +1,5 @@
 <div class="container">
-    <span class="header">To do List:</span>
+    <h1 class="title">Todo List:</h1>
     <hr>
     <div class="input-task">
         <input type="text" class="addTask" placeholder="Type your task here..." [(ngModel)]="task">
@@ -7,12 +7,13 @@
         <button class="btn" (click)="saveTask()" [hidden]="!edit" [disabled]="!task">Save</button>
     </div>
     <div class="task-list">
-        <div class="header">Tasks</div>
+        <h2 class="title">Tasks:</h2>
         <div *ngFor="let task of taskList;let i=index" class="task"><span *ngIf="task.status!='done'">{{i+1}}. {{task.detail}}</span><span *ngIf="task.status=='done'" class="done-task">{{i+1}}. {{task.detail}} </span>
             <div class="task-button">
-                <input type="checkbox" class="btn" (click)="markDone(i)">
+                <label class="status"><span *ngIf="task.status!='done'">Incomplete</span><span *ngIf="task.status=='done'">Done</span></label>
+                <button class="btn" (click)="markDone(i)" ><span *ngIf="task.status!='done'">Mark Done</span><span *ngIf="task.status=='done'">Mark Incomplete</span></button>
                 <button class="btn" (click)="editTask(i)" [disabled]="task.status=='done'">Edit</button>
-                <button class="btn" (click)="deleteTask(i)">Delete</button>
+                <button class="btn" (click)="deleteTask(i)" [disabled]="edit">Delete</button>
             </div>
         </div>
     </div>
